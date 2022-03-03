@@ -47,7 +47,7 @@ export class ProductListComponent implements OnInit {
     else {
       const response = await this.apiService.getCharacter().toPromise();
       if (response) {
-        this.apiList = Object.values(response)[1] as any[];
+        this.apiList = Object.values(response) ;
         console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
 
       }

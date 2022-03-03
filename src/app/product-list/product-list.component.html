@@ -9,10 +9,10 @@
             <ul style="margin:20px;">
                 <li *ngFor="let item of apiList " class="item">
                     <div class="img-item">
-                        <img height="130" width="150" [src]="item.image" alt="shop">
+                        <img height="130" width="150" [src]="item.imageUrl" alt="shop">
                     </div>
                     <div class="detail">
-                        <div> <a [routerLink]="['/product-list', item.id]"> {{ item.name }} </a></div>
+                        <div> <a [routerLink]="['/product-list', item.id]"> {{ item.title }} </a></div>
                         <p>{{ item.price | currency:'EUR' }}</p>
                         <button mat-raised-button color="primary" (click)="addToCart(item)">Add to cart</button>
                     </div>

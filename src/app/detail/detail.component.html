@@ -1,15 +1,15 @@
-<div style="padding: 10px;">
+<div style="padding: 10px;" *ngIf="item">
     <h1>Détail de l'article</h1>
     <hr>
 
     <div id="container" style="padding: 30;">
         <div class="img">
-            <img width="500" [src]="'../../assets/'+item?.image" alt="shop">
+            <img width="500" [src]="item.imageUrl" alt="shop">
         </div>
         <div class="description">
             <ul>
-                <li> Titre de l'article : {{ item?.name }}</li>
-                <li> Description de l'article : {{ item?.description }} </li>
+                <li> Titre de l'article : {{ item.title }}</li>
+                <li> Quantité disponible : {{ item.qte }} </li>
                 <li> Prix de l'article : {{ item?.price | currency:'EUR' }} </li>
             </ul>
             <div style="padding-left:30px;">
