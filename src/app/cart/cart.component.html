@@ -12,22 +12,7 @@
             </div>
         </li>
     </ol>
-    <ng-container *ngIf="crossel_products?.length">
-        <h1>
-            Vous souhaiterez aussi acheter ces articles ?
-        </h1>
-        <ul id="crossel" style="margin:20px;">
-            <li *ngFor="let item of crossel_products" class="item" style="margin-top: 10px;">
-                <div class="img-item">
-                    <img width="50" [src]="item.image" alt="shop">
-                </div>
-                <div class="detail">
-                    <div> <a [routerLink]="['/product-list', item.id]"> {{ item.name }} </a></div>
-                    <p>{{ item.price | currency:'EUR' }}</p>
-                </div>
-            </li>
-        </ul>
-    </ng-container>
+
 
 
     <div>
