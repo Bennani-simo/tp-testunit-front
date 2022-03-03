@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    /*const user = localStorage.getItem('user');
     if (!user)
       this.router.navigateByUrl('login');
     else {
@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
         this.initOrder()
       else
         this.order = JSON.parse(order);
-    }
+    }*/
     this.loadProduct();
   }
 

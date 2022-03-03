@@ -18,4 +18,7 @@ export class AppComponent {
   goto() {
     this.router.navigateByUrl('cart');
   }
+  goto1() {
+    this.router.navigateByUrl('product-list');
+  }
 }
