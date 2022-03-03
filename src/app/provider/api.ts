@@ -6,15 +6,15 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 
-export class ProductService {
-    path: string = 'http://localhost:3000/products';
+export class ApiService {
+    path: string = 'https://rickandmortyapi.com/api/character';
     constructor(
         protected httpClient: HttpClient,
     ) {
 
     }
 
-    public getProduct(): Observable<any> {
+    public getCharacter(): Observable<any> {
 
       const response =  this.httpClient.get(this.path);
         console.log(response);

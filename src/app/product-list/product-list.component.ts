@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../provider/api';
 import { OrderDto, OrderService, OrderStatus, ProductType, UserDto } from '../provider/order.service';
 import { ProductService } from '../provider/product.service';
 
@@ -13,6 +14,7 @@ export class ProductListComponent implements OnInit {
   public productList: ProductType[] = [];
   public order?: OrderDto;
   public productAdd?: ProductType;
+  public apiList:any[]=[];
 
   public loading?: boolean = false;
   public userConnected?: UserDto;
@@ -20,31 +22,21 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private orderService: OrderService,
     private router: Router,
+    private apiService: ApiService,
   ) { }
 
   ngOnInit(): void {
-    /*const user = localStorage.getItem('user');
-    if (!user)
-      this.router.navigateByUrl('login');
-    else {
-      this.userConnected = JSON.parse(user);
-      const order = localStorage.getItem('order');
-      if (!order)
-        this.initOrder()
-      else
-        this.order = JSON.parse(order);
-    }*/
+
+
+
+
+
+
     this.loadProduct();
   }
 
-  private async initOrder() {
-    const response = await this.orderService.initOrder((this.userConnected as UserDto).id_user as string).toPromise();
-    console.log("🚀 ~ ngOnInit ~ response", response.order);
-    if (response.order) {
-      localStorage.setItem('order', JSON.stringify(response.order));
-      this.order = response.order;
-    }
-  }
+
+
 
   async loadProduct() {
     this.loading = true;
@@ -53,12 +45,10 @@ export class ProductListComponent implements OnInit {
       this.productList = JSON.parse(localResponse);
     }
     else {
-      const response = await this.productService.getProduct().toPromise();
+      const response = await this.apiService.getCharacter().toPromise();
       if (response) {
-        this.productList = Object.values(response)[3] as ProductType[];
-        if (this.productList?.length)
-          localStorage.setItem('productList', JSON.stringify(this.productList));
-        console.log("🚀 ~ loadProduct ~ response", this.productList);
+        this.apiList = Object.values(response)[1] as any[];
+        console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
 
       }
     }
