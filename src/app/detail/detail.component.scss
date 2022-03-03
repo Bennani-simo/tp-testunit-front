@@ -1,0 +1,22 @@
+#container{
+    display: flex;
+    justify-content: center;
+
+    >div{
+        width: 40%;
+        border: 1px solid;
+        height: 500px;
+        margin-left: 20px;
+        
+        
+        &:first-child{
+            img{
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        
+    }
+    
+   
+}

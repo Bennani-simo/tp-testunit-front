@@ -1,0 +1,47 @@
+
+.flexbox{
+    display: flex;
+    .flex-item{
+        width: 50%;
+    }
+}
+ul{
+    border-right: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+
+    li{
+        list-style-type: none;
+        border: 1px solid;
+        display: flex;
+        height: 200px;
+        width: 300px;
+        text-align: center;
+        margin: 50px;
+        flex-wrap: wrap;
+
+        >div{
+            width: 100%;
+
+        }
+
+        .img-item{
+            height: 70%;
+            border-bottom: 1px solid;
+        }
+        .detail{
+            height: 30%;
+            display: flex;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            justify-content: space-between;
+            align-items: center;
+
+            button{
+                height: 40px;
+                box-shadow: none;
+            }
+        }
+    }
+}
