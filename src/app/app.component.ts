@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
+import { AppService } from './provider/app.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 })
 export class AppComponent {
   title = 'tp-archilog';
+  public AppService = AppService;
   constructor(
     private router: Router
   ) {
@@ -16,7 +18,7 @@ export class AppComponent {
   }
 
   goto() {
-    this.router.navigateByUrl('cart');
+    this.router.navigateByUrl(`cart`);
   }
   goto1() {
     this.router.navigateByUrl('product-list');

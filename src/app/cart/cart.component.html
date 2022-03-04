@@ -2,21 +2,23 @@
     <h1>Mon Panier</h1>
     <hr>
     <ol style="margin:20px;">
-        <li *ngFor="let item of productCartList" class="item" style="margin-top: 10px;">
+
+        <li *ngFor="let item of cart.panierProducts" class="item" style="margin-top: 10px;">
             <div class="img-item">
-                <img width="50" [src]="item.image" alt="shop">
+                <img width="50" [src]="item?.product?.imageUrl" alt="shop">
             </div>
             <div class="detail">
-                <div> <a [routerLink]="['/product-list', item.id]"> {{ item.name }} </a></div>
-                <p>{{ item.price | currency:'EUR' }}</p>
+                <div> <a [routerLink]="['/product-list', item?.product?.id]"> {{ item?.product?.name }} </a></div>
+                <p>{{ item?.product?.price | currency:'EUR' }}</p>
             </div>
         </li>
+
     </ol>
 
 
 
-    <div>
-        <button mat-raised-button color="primary" (click)="validateCommand()" *ngIf="product">Valider ma
+    <!--  <div>
+        <button mat-raised-button color="primary" *ngIf="cart.produits?.length">Valider ma
             commande</button>
-    </div>
+    </div> -->
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../provider/api';
-import { ProductType } from '../provider/order.service';
+import { ProductService } from '../provider/product.service';
 
 @Component({
   selector: 'app-detail',
@@ -10,16 +9,14 @@ import { ProductType } from '../provider/order.service';
 })
 export class DetailComponent implements OnInit {
 
-  item:any;
+  item: any;
   id: string;
   constructor(
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private productService: ProductService
 
 
-    )
-
-    {
+  ) {
     this.id = (this.route.snapshot.paramMap.get('id') as string);
     console.log("🚀 DetailComponent ~ this.id", this.id)
     this.getProduct();
@@ -32,9 +29,9 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private async getProduct(){
-    const response = await this.apiService.getProduct(this.id).toPromise();
-    if(response)
+  private async getProduct() {
+    const response = await this.productService.getProduct(this.id).toPromise();
+    if (response)
       this.item = response;
   }
 

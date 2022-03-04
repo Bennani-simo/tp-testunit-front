@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../provider/api';
-import { OrderDto, OrderService, OrderStatus, ProductType, UserDto } from '../provider/order.service';
+import { AppService } from '../provider/app.service';
+import { Cart, PanierStatus, ProductType } from '../provider/models';
+import { PanierService } from '../provider/panier.service';
 import { ProductService } from '../provider/product.service';
-
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -12,43 +12,41 @@ import { ProductService } from '../provider/product.service';
 export class ProductListComponent implements OnInit {
 
   public productList: ProductType[] = [];
-  public order?: OrderDto;
   public productAdd?: ProductType;
-  public apiList:any[]=[];
+  public apiList: any[] = [];
+
+  public cart: Cart = {};
 
   public loading?: boolean = false;
-  public userConnected?: UserDto;
+  AppService = AppService;
   constructor(
     private productService: ProductService,
-    private orderService: OrderService,
+    private panierService: PanierService,
     private router: Router,
-    private apiService: ApiService,
   ) { }
 
   ngOnInit(): void {
-
-
-
-
-
-
     this.loadProduct();
+    this.loadCart();
   }
 
-
-
-
-  async loadProduct() {
+  private async loadCart() {
+    const response = await this.panierService.getPanierActif().toPromise();
+    if (response)
+      this.cart = response;
+    console.log("🚀 ~ loadCart ~ this.cart", this.cart)
+  }
+  private async loadProduct() {
     this.loading = true;
     const localResponse = localStorage.getItem('productList');
     if (localResponse) {
       this.productList = JSON.parse(localResponse);
     }
     else {
-      const response = await this.apiService.getCharacter().toPromise();
+      const response = await this.productService.getProducts().toPromise();
       if (response) {
-        this.apiList = Object.values(response) ;
-        console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
+        this.apiList = Object.values(response);
+        //   console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
 
       }
     }
@@ -56,26 +54,25 @@ export class ProductListComponent implements OnInit {
     this.loading = false;
   }
   async addToCart(product: ProductType) {
+    if (!this.cart.panierProducts?.length)
+      this.cart.panierProducts = [];
 
-    if (!this.order?.cart || !this.order?.cart?.produits?.length) {
-      Object.assign({
-        cart: {
-          produits: [product],
-        },
-        statut: OrderStatus.PREPARATION
+    this.cart.panierProducts = [
+      {
+        productId: product.id,
+        product: product,
+        panierId: this.cart.id,
       },
-        this.order);
-    }
-    else {
-      this.order.cart.produits.push(product);
-    }
+    ];
+
+    this.cart.statut = PanierStatus.ACTIF;
+
     this.productAdd = product;
 
+    const response = await this.panierService.addPanier(this.cart).toPromise();
+    if (response) {
+      AppService.cartId = response.id;
+    }
   }
-
-  getCrosselProduct() {
-    return this.productList.filter(x => x.category === this.productAdd?.category && x.id !== this.productAdd?.id);
-  }
-
 
 }
