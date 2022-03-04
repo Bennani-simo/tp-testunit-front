@@ -14,19 +14,27 @@ describe("header selector", () => {
   it("Available product contains 24 item", () => {
     cy.get(".flex-item")
       .find("li")
-      .should("have.length", 24);
+      .should("have.length", 25);
  });
 
- it('redirect to panier', () => {
-    cy.get(".app")
-  //cy.get('input[name=description]').type('Hello World')
-    .find("button:first")
-    .click()
 
+ it("ajout au panier", () => {
+  cy.get(".detail").first()
+  .find("button")
+  .click()
+});
+
+
+
+ it('redirect to panier', () => {
+    cy.get(".button1")
+    .find("button")
+    .click()
     cy.location('pathname').should('eq', '/cart')
 });
 
-it("Application header contain text", () => {
+
+it("La page panier est affiché", () => {
   cy.get(".app")
     .find("button:first")
     .click()
@@ -36,11 +44,24 @@ it("Application header contain text", () => {
 });
 
 
+it("IL Y'a un article dans le panier", () => {
+  cy.get(".app")
+    .find("button:first")
+    .click()
+    cy.get(".test2")
+    .find("li")
+    .should("have.length", 1);
+});
 
 
+it('redirect to STORE', () => {
+  cy.get(".button2")
+//cy.get('input[name=description]').type('Hello World')
+  .find("button")
+  .click()
 
-
-
+  cy.location('pathname').should('eq', '/product-list')
+});
 
 });
 

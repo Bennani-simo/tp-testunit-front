@@ -8,9 +8,9 @@ describe('Example to demonstrate API Mocking in Cypress', () => {
   })
 
   it('Mock the Tags from the API Response and then validate on UI', () => {
-      cy.get('.detail')
-      .should('contain', 'cypress')
-      .and('contain','automation')
+    cy.get(".flex-item")
+    .find("li")
+    .should("have.length", 25);
 
   })
 
