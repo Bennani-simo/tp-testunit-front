@@ -32,4 +32,12 @@ export class CartComponent implements OnInit {
       this.cart = cartResponse;
   }
 
+  async onDeleteItem(id: string | undefined) {
+    if (!id)
+      return;
+    const deleteResponse = await this.panierService.deletePanier(id as string).toPromise();
+    console.log("🚀 ~ onDeleteItem ~ deleteResponse", deleteResponse)
+    this.loadCart();
+  }
+
 }

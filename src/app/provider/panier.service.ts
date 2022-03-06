@@ -26,5 +26,11 @@ export class PanierService {
         return this.httpClient.get(this.path);
     }
 
+    public deletePanier(id: string) {
+        return this.httpClient.delete(this.path, {
+            params: { id }
+        });
+    }
+
 
 }

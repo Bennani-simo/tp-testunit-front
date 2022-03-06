@@ -12,6 +12,7 @@ export enum PanierStatus {
 }
 
 export interface panierProduct {
+    id?: string;
     qte?: number;
 
     productId?: string;

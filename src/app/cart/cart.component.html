@@ -4,13 +4,25 @@
     <ol style="margin:20px;">
 
         <li *ngFor="let item of cart.panierProducts" class="item" style="margin-top: 10px;">
-            <div class="img-item">
-                <img width="50" [src]="item?.product?.imageUrl" alt="shop">
+            <div style="display: flex;">
+                <div>
+                    <div class="img-item">
+                        <img width="50" [src]="item?.product?.imageUrl" alt="shop">
+                    </div>
+                    <div class="detail">
+                        <div> <a [routerLink]="['/product-list', item?.product?.id]"> {{ item?.product?.name }} </a>
+                        </div>
+                        <p>{{ item?.product?.price | currency:'EUR' }}</p>
+                    </div>
+                </div>
+                <div style="margin-left: 10px;">
+                    <button mat-raised-button (click)="onDeleteItem(item.id)">
+                        <mat-icon>delete</mat-icon>
+                        supprimer
+                    </button>
+                </div>
             </div>
-            <div class="detail">
-                <div> <a [routerLink]="['/product-list', item?.product?.id]"> {{ item?.product?.name }} </a></div>
-                <p>{{ item?.product?.price | currency:'EUR' }}</p>
-            </div>
+
         </li>
 
     </ol>

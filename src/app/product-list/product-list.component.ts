@@ -38,17 +38,11 @@ export class ProductListComponent implements OnInit {
   }
   private async loadProduct() {
     this.loading = true;
-    const localResponse = localStorage.getItem('productList');
-    if (localResponse) {
-      this.productList = JSON.parse(localResponse);
-    }
-    else {
-      const response = await this.productService.getProducts().toPromise();
-      if (response) {
-        this.apiList = Object.values(response);
-        //   console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
 
-      }
+    const response = await this.productService.getProducts().toPromise();
+    if (response) {
+      this.apiList = Object.values(response);
+      //   console.log("🚀 ProductListComponent ~ loadProduct ~ apiProduct", this.apiList)
     }
 
     this.loading = false;
@@ -62,6 +56,7 @@ export class ProductListComponent implements OnInit {
         productId: product.id,
         product: product,
         panierId: this.cart.id,
+        qte: 1
       },
     ];
 
@@ -73,6 +68,7 @@ export class ProductListComponent implements OnInit {
     if (response) {
       AppService.cartId = response.id;
     }
+    this.loadCart();
   }
 
 }
